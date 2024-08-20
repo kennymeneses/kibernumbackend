@@ -1,4 +1,3 @@
-using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KibernumCrud.Api.Controllers.V1;

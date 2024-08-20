@@ -8,7 +8,7 @@ public class ConfigurationConstants
     public const int MinorApiVersion = 0;
     public const string GroupNameFormat = "'v'VVV";
     public const string SwaggerJsonEndpoint = "/swagger/{0}/swagger.json";
-    public const string ApiTitle = "Kibernum - Crud Application API .NET 8 - Code Challenge";
+    public const string ApiTitle = "Kibernum - Crud API .NET 8 - Code Challenge";
 
     #endregion
 }
