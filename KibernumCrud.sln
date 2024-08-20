@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{629FD91E-7CFD-4D7D-A7B0-F9AFCF7BA00F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KibernumCrud.Api", "src\KibernumCrud.Api\KibernumCrud.Api.csproj", "{17506CB9-1BC9-4465-B1EA-18A37C33D3F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KibernumCrud.Application", "src\KibernumCrud.Application\KibernumCrud.Application.csproj", "{51B3231F-7CB5-4F68-AEA0-B7EA7EA86836}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KibernumCrud.DataAccess", "src\KibernumCrud.DataAccess\KibernumCrud.DataAccess.csproj", "{9EF6B8C5-5E73-46B6-81C7-137A03D52154}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{6AE4EBED-B179-4AAE-A87E-08414E121D1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KibernumCrud.TestHelper", "tests\KibernumCrud.TestHelper\KibernumCrud.TestHelper.csproj", "{E7368E63-FE50-450E-A772-68531CAFB3A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KibernumCrud.IntegrationTests", "tests\KibernumCrud.IntegrationTests\KibernumCrud.IntegrationTests.csproj", "{39070708-9777-4F69-99C3-ABD6AD21C09A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KibernumCrud.UnitTests", "tests\KibernumCrud.UnitTests\KibernumCrud.UnitTests.csproj", "{E2F72D39-1B2A-451C-9217-26ABFF79B09F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{17506CB9-1BC9-4465-B1EA-18A37C33D3F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17506CB9-1BC9-4465-B1EA-18A37C33D3F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17506CB9-1BC9-4465-B1EA-18A37C33D3F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17506CB9-1BC9-4465-B1EA-18A37C33D3F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51B3231F-7CB5-4F68-AEA0-B7EA7EA86836}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51B3231F-7CB5-4F68-AEA0-B7EA7EA86836}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51B3231F-7CB5-4F68-AEA0-B7EA7EA86836}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51B3231F-7CB5-4F68-AEA0-B7EA7EA86836}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EF6B8C5-5E73-46B6-81C7-137A03D52154}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EF6B8C5-5E73-46B6-81C7-137A03D52154}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EF6B8C5-5E73-46B6-81C7-137A03D52154}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EF6B8C5-5E73-46B6-81C7-137A03D52154}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7368E63-FE50-450E-A772-68531CAFB3A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7368E63-FE50-450E-A772-68531CAFB3A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7368E63-FE50-450E-A772-68531CAFB3A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7368E63-FE50-450E-A772-68531CAFB3A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39070708-9777-4F69-99C3-ABD6AD21C09A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39070708-9777-4F69-99C3-ABD6AD21C09A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39070708-9777-4F69-99C3-ABD6AD21C09A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39070708-9777-4F69-99C3-ABD6AD21C09A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2F72D39-1B2A-451C-9217-26ABFF79B09F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2F72D39-1B2A-451C-9217-26ABFF79B09F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2F72D39-1B2A-451C-9217-26ABFF79B09F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2F72D39-1B2A-451C-9217-26ABFF79B09F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{17506CB9-1BC9-4465-B1EA-18A37C33D3F0} = {629FD91E-7CFD-4D7D-A7B0-F9AFCF7BA00F}
+		{51B3231F-7CB5-4F68-AEA0-B7EA7EA86836} = {629FD91E-7CFD-4D7D-A7B0-F9AFCF7BA00F}
+		{9EF6B8C5-5E73-46B6-81C7-137A03D52154} = {629FD91E-7CFD-4D7D-A7B0-F9AFCF7BA00F}
+		{E7368E63-FE50-450E-A772-68531CAFB3A3} = {6AE4EBED-B179-4AAE-A87E-08414E121D1E}
+		{39070708-9777-4F69-99C3-ABD6AD21C09A} = {6AE4EBED-B179-4AAE-A87E-08414E121D1E}
+		{E2F72D39-1B2A-451C-9217-26ABFF79B09F} = {6AE4EBED-B179-4AAE-A87E-08414E121D1E}
+	EndGlobalSection
+EndGlobal

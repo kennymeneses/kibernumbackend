@@ -1,0 +1,6 @@
+@KibernumCrud.Api_HostAddress = http://localhost:5201
+
+GET {{KibernumCrud.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
