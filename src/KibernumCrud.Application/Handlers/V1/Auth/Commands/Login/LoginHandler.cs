@@ -1,5 +1,5 @@
 using KibernumCrud.Application.Configuration;
-using KibernumCrud.Application.Models.V1.Responses.Login;
+using KibernumCrud.Application.Models.V1.Responses.Auth;
 using KibernumCrud.Application.Models.V1.Security;
 using KibernumCrud.DataAccess.Entities;
 using KibernumCrud.DataAccess.Repositories.Interfaces;

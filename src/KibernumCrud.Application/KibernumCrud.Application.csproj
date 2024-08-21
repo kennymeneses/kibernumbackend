@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Models\V1\Responses\Login\" />
     <Folder Include="Models\V1\Responses\Users\" />
   </ItemGroup>
 

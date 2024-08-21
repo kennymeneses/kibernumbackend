@@ -1,4 +1,4 @@
-namespace KibernumCrud.Application.Models.V1.Responses.Login;
+namespace KibernumCrud.Application.Models.V1.Responses.Auth;
 
 public sealed class LoginResult
 {

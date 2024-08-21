@@ -1,5 +1,5 @@
 using KibernumCrud.Application.Configuration;
-using KibernumCrud.Application.Models.V1.Responses.Login;
+using KibernumCrud.Application.Models.V1.Responses.Auth;
 using Mediator;
 
 namespace KibernumCrud.Application.Handlers.V1.Auth.Commands.Login;
