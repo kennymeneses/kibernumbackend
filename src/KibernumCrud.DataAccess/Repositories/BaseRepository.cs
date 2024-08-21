@@ -17,12 +17,12 @@ public abstract class BaseRepository<TEntity>: IBaseRepository<TEntity> where TE
     
     public virtual async Task<int> CountAsync(CancellationToken cancellationToken)
     {
-        return await _dbContext.Set<TEntity>().CountAsync(cancellationToken);
+        return await _dbContext.Set<TEntity>().Where(entity => !entity.Deleted).CountAsync(cancellationToken);
     }
 
     public async Task<List<TEntity>> ListAsync(CancellationToken cancellationToken)
     {
-        return await _dbContext.Set<TEntity>().ToListAsync(cancellationToken);
+        return await _dbContext.Set<TEntity>().Where(entity => !entity.Deleted).ToListAsync(cancellationToken);
     }
 
     public async Task<TEntity?> GetById(int id, CancellationToken cancellationToken)

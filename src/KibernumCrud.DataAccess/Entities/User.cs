@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KibernumCrud.DataAccess.Entities;
 
+[Table("users", Schema = "public")]
 public class User : BaseEntity
 {
     [Column("name")]
@@ -19,4 +20,7 @@ public class User : BaseEntity
     
     [NotMapped]
     public virtual UserPassword? UserPassword { get; set; }
+    
+    [NotMapped]
+    public virtual ICollection<Contact> Contacts { get; set; } = new List<Contact>();
 }

@@ -5,4 +5,4 @@ using Mediator;
 
 namespace KibernumCrud.Application.Handlers.V1.Contacts.Queries.ListContacts;
 
-public record ListContactsQuery : PaginatedQuery , IRequest<EitherResult<PaginatedContacts, Exception>>;
+public record ListContactsQuery(Guid UserId) : PaginatedQuery , IRequest<EitherResult<PaginatedDtoContactsResult, Exception>>;

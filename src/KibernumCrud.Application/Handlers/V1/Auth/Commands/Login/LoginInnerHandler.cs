@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using KibernumCrud.Application.Models.V1.Security;
 using KibernumCrud.DataAccess.Entities;
+using KibernumCrud.DataAccess.Repositories.Interfaces;
 using Microsoft.IdentityModel.Tokens;
 
 namespace KibernumCrud.Application.Handlers.V1.Auth.Commands.Login;
@@ -11,8 +12,6 @@ internal static class LoginInnerHandler
 {
     public static string BuildToken(User user, JwtSettings jwtSettings)
     {
-        string result;
-        
         var claims = new List<Claim>()
         {
             new (ClaimType.ClaimEmailType, user.Email),
@@ -31,7 +30,7 @@ internal static class LoginInnerHandler
             signingCredentials: signCredential
         );
 
-        result = new JwtSecurityTokenHandler().WriteToken(token);
+        var result = new JwtSecurityTokenHandler().WriteToken(token);
         return result;
     }
 }

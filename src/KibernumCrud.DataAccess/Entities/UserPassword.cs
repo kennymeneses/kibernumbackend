@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KibernumCrud.DataAccess.Entities;
 
+[Table("userpasswords", Schema = "public")]
 public class UserPassword: BaseEntity
 {
     [Column("userid")]

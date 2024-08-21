@@ -17,7 +17,7 @@ public abstract class BaseEntity
     [Column("uuid")]
     public Guid Uuid { get; set; }
     
-    [Column("creation_date", TypeName = "timestamp with time zone")]
+    [Column("creationdate", TypeName = "timestamp with time zone")]
     public DateTime CreationDate { get; set; } = DateTime.UtcNow;
     
     [Column("deleted")]

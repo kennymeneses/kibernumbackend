@@ -3,9 +3,9 @@ using KibernumCrud.DataAccess.Entities;
 
 namespace KibernumCrud.Application.Models.V1.Responses.Contacts;
 
-public sealed record PaginatedContacts : PaginatedResponse<Contact>
+public sealed record PaginatedContactsResult : PaginatedResponse<Contact>
 {
-    public PaginatedContacts(
+    public PaginatedContactsResult(
         int pageNumber,
         int pageSize,
         long totalItems,
