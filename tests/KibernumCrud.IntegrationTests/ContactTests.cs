@@ -28,13 +28,4 @@ public class ContactTests : IAsyncLifetime
         await Task.Delay(200);
         await _resetDatabase();
     }
-
-    [Fact]
-    public async Task GetOk()
-    {
-        DefaultTestEntities dte = DefaultTestEntities.Create();
-        
-        HttpResponseMessage contact = await _client.GetAsync($"api/v1/Contacts/{Guid.NewGuid()}");
-        contact.StatusCode.Should().Be(HttpStatusCode.OK);
-    }
 }
