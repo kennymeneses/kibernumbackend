@@ -6,6 +6,7 @@ using KibernumCrud.Application.Mappings;
 using KibernumCrud.Application.Models.V1.Requests.Contacts;
 using KibernumCrud.Application.Models.V1.Responses.Contacts;
 using KibernumCrud.DataAccess.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KibernumCrud.Api.Controllers.V1;

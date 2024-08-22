@@ -4,7 +4,7 @@ public static class Constants
 {
     #region ApiTestParam
 
-    public const string CalculationFeesUrl = "api/v1/BidCalculations";
+    public const string CalculationFeesUrl = "api/v1/Contacts";
     public const string TestEnvName = "test";
 
     #endregion

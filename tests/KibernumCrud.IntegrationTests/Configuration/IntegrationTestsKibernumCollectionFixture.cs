@@ -1,0 +1,4 @@
+namespace KibernumCrud.IntegrationTests.Configuration;
+
+[CollectionDefinition(nameof(IntegrationTestsKibernumCollectionFixture))]
+public class IntegrationTestsKibernumCollectionFixture : ICollectionFixture<KibernumApiFactory>;
