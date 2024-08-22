@@ -14,16 +14,7 @@ builder.Services.AddRepositories();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerVersioning();
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: "apiPolicy",
-        policy =>
-        {
-            policy.AllowAnyOrigin();
-            policy.AllowAnyHeader();
-            policy.AllowAnyMethod();
-        });
-});
+builder.Services.AddCorsPolicy();
 
 
 var app = builder.Build();
@@ -36,7 +27,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors("apiPolicy");
+app.UseCors(ConfigurationConstants.ApiPolicyName);
 
 app.UseAuthentication();
 

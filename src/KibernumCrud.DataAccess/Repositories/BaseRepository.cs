@@ -46,7 +46,6 @@ public abstract class BaseRepository<TEntity>: IBaseRepository<TEntity> where TE
 
     public void Update(TEntity entity)
     {
-        entity.Deleted = true;
         _dbContext.Update(entity);
     }
 

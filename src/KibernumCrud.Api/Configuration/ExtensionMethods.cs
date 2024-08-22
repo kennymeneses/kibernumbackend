@@ -24,7 +24,7 @@ public static class ExtensionMethods
     {
         services.AddScoped<IUnitOfWork>(servicesProvider => servicesProvider.GetRequiredService<KibernumCrudDbContext>());
         
-        string connectionString = await SecretHandler.GetSecret(GetCredentials(configuration), "kibernum_connectionstring");
+        string connectionString = await SecretHandler.GetSecret(GetCredentials(configuration), ConfigurationConstants.ConnectionStringDb);
         services.AddDbContext<KibernumCrudDbContext>(options => options.UseNpgsql(connectionString));
     }
 
@@ -35,7 +35,7 @@ public static class ExtensionMethods
 
     public static async Task AddSignatureKey(this IServiceCollection services, IConfiguration configuration)
     {
-        string signatureKey = await SecretHandler.GetSecret(GetCredentials(configuration), "kibernum_signature_key");
+        string signatureKey = await SecretHandler.GetSecret(GetCredentials(configuration), ConfigurationConstants.KeySignature);
         JwtSettings jwtSettings = new JwtSettings { Key = signatureKey };
         services.AddSingleton(jwtSettings);
     }
@@ -61,6 +61,20 @@ public static class ExtensionMethods
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IContactRepository, ContactRepository>();
         services.AddScoped<IUserPasswordRepository, UserPasswordRepository>();
+    }
+
+    public static void AddCorsPolicy(this IServiceCollection services)
+    {
+        services.AddCors(options =>
+        {
+            options.AddPolicy(name: ConfigurationConstants.ApiPolicyName,
+                policy =>
+                {
+                    policy.AllowAnyOrigin();
+                    policy.AllowAnyHeader();
+                    policy.AllowAnyMethod();
+                });
+        });
     }
 
     public static void AddApiAuthentication(this IServiceCollection services)
@@ -105,8 +119,8 @@ public static class ExtensionMethods
 
     private static BasicAWSCredentials GetCredentials(IConfiguration configuration)
     {
-        string? accessKey = configuration.GetSection("IAM")["ak"];
-        string? secretKey = configuration.GetSection("IAM")["sak"];
+        string? accessKey = configuration.GetSection(ConfigurationConstants.IamSectionName)[ConfigurationConstants.AccessKeyName];
+        string? secretKey = configuration.GetSection(ConfigurationConstants.IamSectionName)[ConfigurationConstants.SecureAccessKeyName];
         
         var credentials = new BasicAWSCredentials(accessKey, secretKey);
         

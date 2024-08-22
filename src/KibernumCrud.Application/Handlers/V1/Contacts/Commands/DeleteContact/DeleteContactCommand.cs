@@ -4,4 +4,4 @@ using Mediator;
 
 namespace KibernumCrud.Application.Handlers.V1.Contacts.Commands.DeleteContact;
 
-public sealed record DeleteContactCommand : IRequest<EitherResult<Guid, Exception>>;
+public sealed record DeleteContactCommand(Guid ContactId) : IRequest<EitherResult<Guid, Exception>>;

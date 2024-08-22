@@ -1,5 +1,6 @@
 using KibernumCrud.Application.Configuration;
 using KibernumCrud.Application.Handlers.V1.Contacts.Commands.CreateContact;
+using KibernumCrud.Application.Handlers.V1.Contacts.Commands.DeleteContact;
 using KibernumCrud.Application.Handlers.V1.Contacts.Queries.GetContact;
 using KibernumCrud.Application.Mappings;
 using KibernumCrud.Application.Models.V1.Requests.Contacts;
@@ -42,5 +43,30 @@ public class ContactsController : BaseController
         var result = await Sender.Send(command, cancellationToken);
         
         return result.Match(contact => Ok(contact), error => Problem(error.Message));
+    }
+
+    [HttpPut("{id:guid}", Name = nameof(UpdateContact))]
+    [ProducesResponseType(typeof(ContactDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+    [ProducesErrorResponseType(typeof(ProblemDetails))]
+    public async Task<IActionResult> UpdateContact([FromRoute] Guid id, [FromBody] UpdateContactRequest request, CancellationToken cancellationToken)
+    {
+        var command = request.ToUpdateCommand();
+        command = command with { ContactId = id };
+        var result = await Sender.Send(command, cancellationToken);
+        
+        return result.Match(contact => Ok(contact), error => Problem(error.Message));
+    }
+
+    [HttpDelete("{userId:guid}")]
+    [ProducesResponseType(typeof(Guid), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> DeleteContact([FromRoute] Guid userId, CancellationToken cancellationToken)
+    {
+        var command = new DeleteContactCommand(userId);
+        var result = await Sender.Send(command, cancellationToken);
+        
+        return result.Match(contactGuidDeleted => Ok(contactGuidDeleted), error => Problem(error.Message));
     }
 }

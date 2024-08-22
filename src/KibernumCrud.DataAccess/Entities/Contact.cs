@@ -8,11 +8,11 @@ public class Contact : BaseEntity
 {
     [Column("name")]
     [MaxLength(20)]
-    public string Name { get; init; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
     
     [Column("phone")]
     [MaxLength(20)]
-    public string PhoneNumber { get; init; } = string.Empty;
+    public string PhoneNumber { get; set; } = string.Empty;
     
     [Column("userid")]
     public int UserId { get; init; }
