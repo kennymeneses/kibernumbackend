@@ -1,0 +1,22 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace KibernumCrud.DataAccess.Entities;
+
+[Table("contacts", Schema = "public")]
+public class Contact : BaseEntity
+{
+    [Column("name")]
+    [MaxLength(20)]
+    public string Name { get; set; } = string.Empty;
+    
+    [Column("phone")]
+    [MaxLength(20)]
+    public string PhoneNumber { get; set; } = string.Empty;
+    
+    [Column("userid")]
+    public int UserId { get; init; }
+    
+    [NotMapped]
+    public virtual User? User { get; set; }
+}

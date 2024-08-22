@@ -2,6 +2,9 @@
 **/obj/
 
 **/bin/Debug/
+**/obj/Debug/
+**/bin/**
+**/obj/**
 
 .idea/
 
