@@ -23,6 +23,6 @@ public sealed class LoginHandler(
 
         if (request.Password.HashString() != userPassword!.Password) return new UnauthorizedAccessException();
 
-        return new LoginResult{Token = LoginInnerHandler.BuildToken(user, jwtSections)};
+        return new LoginResult{Token = LoginInnerHandler.BuildToken(user, jwtSections), UserId = user.Uuid};
     }
 }

@@ -11,6 +11,7 @@ namespace KibernumCrud.Application.Mappings;
 [Mapper(EnumMappingStrategy = EnumMappingStrategy.ByName)]
 public static partial class ContactMapping
 {
+    [MapProperty(nameof(Contact.Uuid), nameof(ContactDto.Id))]
     public static partial ContactDto ToDto(this Contact contact);
 
     public static partial ListContactsQuery ToQuery(this ListContactsRequest request);
