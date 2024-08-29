@@ -17,7 +17,7 @@ public sealed class CreateContactHandler(
 {
     public async ValueTask<EitherResult<ContactDto, Exception>> Handle(CreateContactCommand request, CancellationToken cancellationToken)
     {
-        User? user = await userRepository.FirstOrDefaultAsync<User>(contact => contact.Uuid == request.UserId, cancellationToken);
+        User? user = await userRepository.FirstOrDefaultAsync<User>(user => user.Uuid == request.UserId, cancellationToken);
 
         if (user is null) return new KeyNotFoundException("User not found");
         

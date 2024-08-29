@@ -3,8 +3,6 @@ using KibernumCrud.Api;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Respawn;
 using Testcontainers.PostgreSql;
@@ -35,12 +33,10 @@ public class KibernumApiFactory : WebApplicationFactory<IApiMarker>, IAsyncLifet
             DefaultPostgresPort);
 
         await _postgreSqlContainer.StartAsync();
-        
-        await InitializeRespawner();
-        await Task.Delay(1000);
-        
+        HttpClient = CreateClient();
         await ApiFactoryTestUtils.MigrateDatabase(Services);
-
+        await InitializeRespawner(Services);
+        await Task.Delay(500);
     }
     
     public new async Task DisposeAsync()
@@ -57,8 +53,7 @@ public class KibernumApiFactory : WebApplicationFactory<IApiMarker>, IAsyncLifet
             services =>
             {
                 ApiFactoryTestUtils.MockAuthentication(services);
-                ApiFactoryTestUtils.UseLocalDatabase(services, _postgreSqlContainer, EnableTestDatabaseInspection);
-                services.RemoveAll(typeof(IHostedService));
+                ApiFactoryTestUtils.UseLocalDatabase(services, _postgreSqlContainer);
             });
 
         builder.ConfigureLogging(logging => logging.ClearProviders());
@@ -76,13 +71,12 @@ public class KibernumApiFactory : WebApplicationFactory<IApiMarker>, IAsyncLifet
         HttpClient = CreateClient();
     }
     
-    private async Task InitializeRespawner()
+    private async Task InitializeRespawner(IServiceProvider serviceProvider)
     {
-        (DbConnection dbConnectionReturned, Respawner respawnerReturned) =
-            await ApiFactoryTestUtils.InitializeRespawner(_postgreSqlContainer, DefaultDbUsernamePassword);
+        (DbConnection dbConnectionReturned, Respawner respawnerReturned) = 
+            await ApiFactoryTestUtils.InitializeRespawner(serviceProvider);
+        
         _dbConnection = dbConnectionReturned;
         _respawner = respawnerReturned;
-    }
-    
-    
+    } 
 }

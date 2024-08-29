@@ -1,4 +1,6 @@
 using System.Data.Common;
+using System.Text.Json;
+using FluentAssertions.Common;
 using KibernumCrud.DataAccess.Configuration;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
@@ -34,7 +36,7 @@ public static class ApiFactoryTestUtils
 
         return postgreSqlBuilder.Build();
     }
-    
+
     public static async Task MigrateDatabase(IServiceProvider services)
     {
         using IServiceScope scope = services.CreateScope();
@@ -43,57 +45,31 @@ public static class ApiFactoryTestUtils
         await db.Database.MigrateAsync();
     }
     
-    public static async Task<(DbConnection DbConnection, Respawner Respawner)> InitializeRespawner(
-        PostgreSqlContainer postgreSqlContainer,
-        string KibernumSchema)
+    public static async Task<(DbConnection DbConnection, Respawner Respawner)> InitializeRespawner(IServiceProvider servicesProvider)
     {
-        DbConnection dbConnection = new NpgsqlConnection(postgreSqlContainer.GetConnectionString());
-        await dbConnection.OpenAsync();
+        var kibernumCrudDbContext = servicesProvider.CreateScope().ServiceProvider.GetRequiredService<KibernumCrudDbContext>();
+        var connection = kibernumCrudDbContext.Database.GetDbConnection();
+        await connection.OpenAsync();
         Respawner respawner = await Respawner.CreateAsync(
-            dbConnection,
+            connection,
             new RespawnerOptions
             {
                 DbAdapter = DbAdapter.Postgres,
-                SchemasToInclude = [KibernumSchema],
-                TablesToIgnore =
-                [
-                    new Table(
-                        KibernumSchema,
-                        "users"),
-                    new Table(
-                        KibernumSchema,
-                        "userpaswords"),
-                    new Table(
-                        KibernumSchema,
-                        "contacts")
-                ],
                 WithReseed = true
             });
-        return (dbConnection, respawner);
+
+        return (connection, respawner);
     }
     
     public static void UseLocalDatabase(
         IServiceCollection services,
-        PostgreSqlContainer postgreSqlContainer,
-        bool enableTestDatabaseInspection)
+        PostgreSqlContainer postgreSqlContainer)
     {
         services
-            .RemoveAll<DbContextOptions<KibernumCrudDbContext>>()
-            .AddDbContext<KibernumCrudDbContext>(
-                (sp, options) =>
-                {
-                    if (enableTestDatabaseInspection)
-                    {
-                        options.LogTo(Console.WriteLine);
-                    }
-
-                    options.UseNpgsql(postgreSqlContainer.GetConnectionString() + ";Include Error Detail=true");
-                    options.AddInterceptors(sp.GetRequiredService<ISaveChangesInterceptor>());
-                    options.EnableSensitiveDataLogging();
-                },
-                ServiceLifetime.Singleton,
-                ServiceLifetime.Singleton);
-        services.RemoveAll<IOptions<KibernumCrudDbContext>>();
+            .AddDbContext<KibernumCrudDbContext>(options =>
+            {
+                options.UseNpgsql(postgreSqlContainer.GetConnectionString());
+            });
     }
 
     public static void MockAuthentication(IServiceCollection services)

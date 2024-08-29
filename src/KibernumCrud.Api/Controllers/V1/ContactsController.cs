@@ -43,7 +43,7 @@ public class ContactsController : BaseController
         var command = new CreateContactCommand(request.UserId, request.Name, request.PhoneNumber);
         var result = await Sender.Send(command, cancellationToken);
         
-        return result.Match(contact => Ok(contact), error => Problem(error.Message));
+        return result.Match(contact => CreatedAtAction(nameof(CreateContact), contact), error => Problem(error.Message));
     }
 
     [HttpPut("{id:guid}", Name = nameof(UpdateContact))]
