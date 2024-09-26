@@ -7,6 +7,7 @@ using KibernumCrud.Application.Models.V1.Requests.Users;
 using KibernumCrud.Application.Models.V1.Responses.Contacts;
 using KibernumCrud.Application.Models.V1.Responses.Users;
 using KibernumCrud.IntegrationTests.Configuration;
+using Testcontainers.PostgreSql;
 
 namespace KibernumCrud.IntegrationTests;
 
@@ -34,9 +35,22 @@ public class ContactTests : IAsyncLifetime
         await Task.Delay(200);
         await _resetDatabase();
     }
+
+    [Fact]
+    public async Task CreateContact_ShouldReturnCreatedContact()
+    {
+        DefaultTestEntities dte = DefaultTestEntities.Create();
+        
+        CreateUserRequest userRequest = new CreateUserRequest(TestHelper.Faker.Person.FirstName,
+            TestHelper.Faker.Person.LastName,
+            TestHelper.Faker.Person.Email,"");
+        
+        UserDto userDtoCreated = await _client.As(dte.User).Create<CreateUserRequest, UserDto>("api/v1/Users", userRequest);
+        userDtoCreated.LastName.Should().Be(userRequest.Lastname);
+    }
     
     [Fact]
-    public async Task GetOk()
+    public async Task GetListContactsSuccessfully_WhenRequestIsValid()
     {
         DefaultTestEntities dte = DefaultTestEntities.Create();
         
