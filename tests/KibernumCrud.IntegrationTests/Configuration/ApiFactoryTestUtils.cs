@@ -1,17 +1,11 @@
 using System.Data.Common;
-using System.Text.Json;
-using FluentAssertions.Common;
 using KibernumCrud.DataAccess.Configuration;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
-using Npgsql;
 using Respawn;
-using Respawn.Graph;
 using Testcontainers.PostgreSql;
 using WebMotions.Fake.Authentication.JwtBearer;
 
@@ -66,6 +60,7 @@ public static class ApiFactoryTestUtils
         PostgreSqlContainer postgreSqlContainer)
     {
         services
+            .RemoveAll<DbContextOptions<KibernumCrudDbContext>>()
             .AddDbContext<KibernumCrudDbContext>(options =>
             {
                 options.UseNpgsql(postgreSqlContainer.GetConnectionString());
@@ -84,5 +79,10 @@ public static class ApiFactoryTestUtils
             options.DefaultAuthenticateScheme = FakeJwtBearerDefaults.AuthenticationScheme;
             options.DefaultChallengeScheme = FakeJwtBearerDefaults.AuthenticationScheme;
         });
+    }
+    
+    public static void RemoveBackgroundServices(IServiceCollection services)
+    {
+        services.RemoveAll(typeof(IHostedService));
     }
 }
